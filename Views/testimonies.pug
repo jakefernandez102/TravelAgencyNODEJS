@@ -1,0 +1,34 @@
+extends ./layout/index
+
+block contenido
+    main.container.mt-5
+        h1.text-center.mt-5= page
+
+            blockquote.text-center Read about our customer and their experiences. 
+        include ./layout/testimoniesBlocks
+
+        //- p= JSON.stringify(testim)
+
+        .row
+
+            .col-md-12
+                h1.d-block.w-100 Add a testimonial 
+
+                if(errors)
+                    each error in errors
+                        .alert.col.alert-danger.text-center= error.message
+
+            .row.justify-content-center.col
+                .col-md-8
+                    form(action="/testimonies" method="POST")
+                        .form-group 
+                            lable(for="name") Name: 
+                            input#name(type="text" placeholder="Your Name" name="name" class="form-control",value=name)
+                        .form-group 
+                            lable(for="email") Email: 
+                            input#email(type="email" placeholder="Your email" name="email" class="form-control", value=email)
+                        .form-group 
+                            lable(for="message") Message: 
+                            textarea#message(name="message" cols="30" rows="10" class="form-control", )= message
+
+                        input.btn.btn-success.btn-block(type="submit")
